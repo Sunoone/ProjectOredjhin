@@ -60,7 +60,7 @@ namespace Freethware.UI
 
             //eventData.position = currentCamera.WorldToViewportPoint(Input.mousePosition);
             ActiveCanvas.Raycast(eventData, resultsUI);
-            if (resultsUI.Count > 0)
+            if (resultsUI != null && resultsUI.Count > 0)
             {
                 ProcessResults(resultsUI, eventData);
                 if (SelectionType != SelectionType.PiercingAllSelection)

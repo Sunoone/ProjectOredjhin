@@ -554,6 +554,9 @@ public class custom_inputs : MonoBehaviour
             // if we received key-input thats not ESCAPE 
             if (Event.current.type == EventType.KeyDown && inputBool[n] == true && Event.current.keyCode != KeyCode.Escape)
             {
+                //DrawButtonHelper(n, Event.current.keyCode, "#", inputKey[n].ToString(), false, false);
+
+
                 // store the keycode in our key variable
                 inputKey[n] = Event.current.keyCode;
                 // we don't want more input on this element
@@ -918,7 +921,7 @@ public class custom_inputs : MonoBehaviour
                 // check for doubles
                 checDoubleAxis(joystickString[n], n,1);
             }
-             //*/
+             //
             if (Input.GetAxis("Joystick_5b") > 0.8f && inputBool[n] == true && Event.current.keyCode != KeyCode.Escape)
             {
                 // delete the key 
@@ -937,7 +940,7 @@ public class custom_inputs : MonoBehaviour
                 // check for doubles
                 checDoubleAxis(joystickString[n], n,1);
             }
-            /*// ** this is commented out to support the xbox360 controller on the MAC
+            / ** this is commented out to support the xbox360 controller on the MAC
             if (Input.GetAxis("Joystick_6a") > 0.8f && inputBool[n] == true && Event.current.keyCode != KeyCode.Escape)
             {
                 // delete the key 
@@ -956,7 +959,7 @@ public class custom_inputs : MonoBehaviour
                 // check for doubles
                 checDoubleAxis(joystickString[n], n,1);
             }
-             //*/
+             //
             if (Input.GetAxis("Joystick_6b") > 0.8f && inputBool[n] == true && Event.current.keyCode != KeyCode.Escape)
             {
                 // delete the key 
@@ -1031,6 +1034,8 @@ public class custom_inputs : MonoBehaviour
             }
             if (Input.GetAxis("Joystick_8b") > 0.8f && inputBool[n] == true && Event.current.keyCode != KeyCode.Escape)
             {
+
+
                 // delete the key 
                 inputKey[n] = KeyCode.None;
                 // we don't want more input on this element
@@ -1046,10 +1051,49 @@ public class custom_inputs : MonoBehaviour
                 saveInputs();
                 // check for doubles
                 checDoubleAxis(joystickString[n], n,1);
-            }
+            }*/
         }
    
     }
+
+    private void DrawButtonHelper(int index, KeyCode key, string jString, string iString, bool iBool, bool jBool)
+    {
+        // delete the key 
+        inputKey[index] = key;
+        // we don't want more input on this element
+        inputBool[index] = !iBool;
+        // state we are using the joystick axis on this
+        joystickActive[index] = jBool;
+        joystickString[index] = jString;
+        // Update the buttons inputstring to the new key
+        inputString[index] = iString;
+        // we don't wait for key input anymore
+        tempbool = false;
+        // save our configuration
+        saveInputs();
+        // check for doubles
+        checDoubleAxis(jString, index, 1);
+    }
+
+    /*private void Whatthisdo(ref KeyCode[] keyList, ref bool[] boolList, ref string[] stringList, ref bool[] joystickBoolList, ref string[] joyStrickStringList, int index, KeyCode key)
+    {
+        // add the key 
+        keyList[index] = (KeyCode)key;
+        // we don't want more input on this element
+        boolList[index] = false;
+        // Update the buttons inputstring to the new key
+        stringList[index] = keyList[index].ToString();
+        // we don't wait for key input anymore
+        tempbool = false;
+        // state we are not using the joystick axis on this one
+        joystickBoolList[index] = false;
+        // empty the joysticString
+        joyStrickStringList[index] = "#";
+        // save our configuration
+        saveInputs();
+        // check for doubles
+        checDoubles(keyList[index], index, 1);
+    }*/
     void drawButtons2()
     {
         // mouse and menu stuff
