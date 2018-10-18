@@ -36,15 +36,15 @@ public class Fighter : MonoBehaviour {
 
 
 
-        InputProfile.GetInputUp(PlayerButton.LightAttack);
-        InputProfile.GetInputUp(PlayerButton.HeavyAttack);
-        InputProfile.GetInputUp(PlayerButton.Jump);
+        InputProfile.GetInputUp(Button.LightAttack);
+        InputProfile.GetInputUp(Button.HeavyAttack);
+        InputProfile.GetInputUp(Button.Jump);
 
 
 
-        if (InputProfile.GetInputDown(PlayerButton.LightAttack))
+        if (InputProfile.GetInputDown(Button.LightAttack))
             LaunchAttack(attackHitboxes[0]);
-        if (InputProfile.GetInputDown(PlayerButton.HeavyAttack)) 
+        if (InputProfile.GetInputDown(Button.HeavyAttack)) 
             LaunchAttack(attackHitboxes[1]);
 
 
@@ -52,7 +52,7 @@ public class Fighter : MonoBehaviour {
         if (controller.isGrounded)
         {
             verticalVelocity = -1;
-            if (InputProfile.GetInputDown(PlayerButton.Jump))
+            if (InputProfile.GetInputDown(Button.Jump))
                 verticalVelocity = 10;
         }
         else
