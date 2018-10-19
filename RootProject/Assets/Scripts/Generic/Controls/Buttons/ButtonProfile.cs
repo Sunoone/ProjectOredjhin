@@ -54,11 +54,13 @@ namespace Freethware.Inputs
         public string ProfileName;
 
         public List<DigitalButton> DigitalInputs;
+        
         public List<AnalogButton> AnalogInputs;
 
         public bool AllowDuplicates; // Duplicates allows the same input to be used for multiple actions.
         public bool Deletable = true;
 
+    
 
         public DigitalInput GetCustomInputForKey(KeyCode key)
         {
@@ -87,36 +89,71 @@ namespace Freethware.Inputs
 
         }
 
-        public bool GetInputDown(Button button)
+
+        public void RunInput()
+        {
+            int length = DigitalInputs.Count;
+            for (int i = 0; i < length; i++)
+            {
+                DigitalInputs[i].RunInputs();
+            }
+        }
+
+
+        public InputState GetButtonState(Button button)
         {
             int length = DigitalInputs.Count;
             for (int i = 0; i < length; i++)
             {
                 if (DigitalInputs[i].PlayerButton == button)
-                    return DigitalInputs[i].GetInputDown();
+                    return DigitalInputs[i].GetInputState();
             }
-            return false;
+            return InputState.None;
         }
-        public bool GetInputUp(Button button)
+
+        public bool GetButtonDown(Button button)
         {
             int length = DigitalInputs.Count;
             for (int i = 0; i < length; i++)
             {
                 if (DigitalInputs[i].PlayerButton == button)
-                    return DigitalInputs[i].GetInputUp();
+                    return DigitalInputs[i].GetButtonDown();
             }
             return false;
         }
-        public bool GetInput(Button button)
+        public bool GetButtonUp(Button button)
         {
             int length = DigitalInputs.Count;
             for (int i = 0; i < length; i++)
             {
                 if (DigitalInputs[i].PlayerButton == button)
-                    return DigitalInputs[i].GetInput();
+                    return DigitalInputs[i].GetButtonUp();
             }
             return false;
         }
+        public bool GetButton(Button button)
+        {
+            int length = DigitalInputs.Count;
+            for (int i = 0; i < length; i++)
+            {
+                if (DigitalInputs[i].PlayerButton == button)
+                    return DigitalInputs[i].GetButton();
+            }
+            return false;
+        }
+
+        public float GetAxis(Button button)
+        {
+            int length = AnalogInputs.Count;
+            for (int i = 0; i < length; i++)
+            {
+                if (AnalogInputs[i].PlayerButton == button)
+                    return AnalogInputs[i].GetAxis();
+            }
+            return 0f;
+        }
+
+
 
         public ButtonProfile Clone()
         {

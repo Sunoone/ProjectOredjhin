@@ -19,6 +19,8 @@ namespace Freethware.Inputs
         }
 
 
+
+
         public ButtonProfile CreateDefaultButtonProfile(int index)
         {
             ButtonProfile newProfile = DefaultProfiles[index].Clone();

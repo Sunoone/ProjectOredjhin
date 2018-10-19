@@ -23,7 +23,7 @@ public class Fighter : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
         controller = GetComponent<CharacterController>();
-        InputProfile = InputManager.Profiles[0];
+        InputProfile = InputManager.DefaultProfiles[0];
 
     }
 	
@@ -34,9 +34,11 @@ public class Fighter : MonoBehaviour {
         //if (InputProfile.
 
 
+        InputProfile.RunInput();
 
 
-        InputProfile.GetInputUp(Button.LightAttack);
+
+        /*InputProfile.GetInputUp(Button.LightAttack);
         InputProfile.GetInputUp(Button.HeavyAttack);
         InputProfile.GetInputUp(Button.Jump);
 
@@ -46,13 +48,13 @@ public class Fighter : MonoBehaviour {
             LaunchAttack(attackHitboxes[0]);
         if (InputProfile.GetInputDown(Button.HeavyAttack)) 
             LaunchAttack(attackHitboxes[1]);
-
+            */
 
 
         if (controller.isGrounded)
         {
             verticalVelocity = -1;
-            if (InputProfile.GetInputDown(Button.Jump))
+            if (InputProfile.GetButtonDown(Button.Jump))
                 verticalVelocity = 10;
         }
         else
@@ -61,7 +63,7 @@ public class Fighter : MonoBehaviour {
         }
 
         moveVector = Vector3.zero;
-        moveVector.x = Input.GetAxis("Horizontal") * MoveSpeed;
+        moveVector.x = InputProfile.GetAxis(Button.AxisHorizontal) * MoveSpeed;
         moveVector.y = verticalVelocity;
 
         controller.Move(moveVector * Time.deltaTime);
