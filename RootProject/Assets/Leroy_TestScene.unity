@@ -188,12 +188,12 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 63046952}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1, z: -10}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 4.81, y: 1, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_Father: {fileID: 470506601}
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &63046957
 MonoBehaviour:
@@ -362,7 +362,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &416122390
 GameObject:
@@ -496,8 +496,9 @@ Transform:
   - {fileID: 898421982}
   - {fileID: 1896002301}
   - {fileID: 958380708}
+  - {fileID: 63046956}
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &470506602
 MonoBehaviour:
@@ -517,7 +518,7 @@ MonoBehaviour:
     AnalogInputs: []
     AllowDuplicates: 0
     Deletable: 1
-  MoveSpeed: 3
+  MoveSpeed: 10
   attackHitboxes:
   - {fileID: 678333471}
   - {fileID: 644400567}
@@ -573,7 +574,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 9
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &619968778
 GameObject:
@@ -906,10 +907,10 @@ Transform:
   m_GameObject: {fileID: 761672131}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: -3.1, z: 0}
-  m_LocalScale: {x: 20.87559, y: 1, z: 35.377926}
+  m_LocalScale: {x: 352.13004, y: 1, z: 35.377926}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &768656694
 GameObject:
@@ -1313,16 +1314,27 @@ MonoBehaviour:
   - ProfileName: Test
     DigitalInputs:
     - PlayerButton: 2
-      InputString: 
       inputKeys:
       - InputKey: 330
+      - InputKey: 331
       inputStrings:
       - InputKey: 0
         InputString: Vertical
         ActivationValue: 0.8
-        Operator: 1
-      singleInput: 1
-    AnalogInputs: []
+        Operator: 2
+      singleInput: 0
+    AnalogInputs:
+    - PlayerButton: 4
+      InputStrings:
+      - Axis: 0
+        Type: 0
+        Index: 0
+        InputString: 
+      - Axis: 0
+        Type: 0
+        Index: 0
+        InputString: 
+      InputKeys: []
     AllowDuplicates: 0
     Deletable: 0
 --- !u!4 &1296036346
@@ -1336,7 +1348,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 8
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1299573833
 GameObject:
@@ -1565,7 +1577,7 @@ RectTransform:
   m_Children:
   - {fileID: 1988400119}
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -1665,7 +1677,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
 --- !u!1 &1979408126
 GameObject:
@@ -1735,7 +1747,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1988400118
 GameObject:
@@ -1947,5 +1959,5 @@ Transform:
   - {fileID: 783665010}
   - {fileID: 1281315388}
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: -180, z: 0}

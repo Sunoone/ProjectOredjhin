@@ -32,12 +32,16 @@ namespace Freethware.Inputs
         None = (1 << 9),
     }*/
 
+  
+
     /// <summary>
     /// Replace the input string with an analog enum that simply is in sync with the InputManager.asset
     /// </summary>
     [System.Serializable]
     public class AnalogInput : ICloneable<AnalogInput>
     {
+
+        [AnalogInput]
         public string InputString;
         public virtual bool IsSimulated() { return false; }
 

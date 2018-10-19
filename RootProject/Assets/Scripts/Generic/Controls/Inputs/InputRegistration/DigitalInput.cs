@@ -22,23 +22,18 @@ namespace Freethware.Inputs
     }*/
 
     [System.Serializable]
-    public class DigitalInput : ICloneable<DigitalInput>
+    public class DigitalInputBase : ICloneable<DigitalInputBase>
     {
-        public virtual DigitalInput Clone()
+        public virtual DigitalInputBase Clone()
         {
-            DigitalInput newInput = new DigitalInput();
-            newInput.InputKey = InputKey;
+            DigitalInputBase newInput = new DigitalInputBase();
             return newInput;
         }
         public virtual bool IsSimulated() { return false; }
-
         protected InputState _inputState;
 
-        public KeyCode InputKey;
-
-        public virtual void SetInputKey(KeyCode key) { InputKey = key; }
-        public virtual KeyCode GetInputKey() { return InputKey; }
-
+        public virtual void SetInputKey(KeyCode key) { }
+        public virtual KeyCode GetInputKey() { return KeyCode.None; }
         public virtual void SetInputString(string ID) { }
         public virtual string GetInputString() { return ""; }
         public virtual void SetActivationValue(float value) { }
@@ -46,7 +41,37 @@ namespace Freethware.Inputs
         public virtual void SetOperatorCondition(OperatorCondition condition) { }
         public virtual OperatorCondition GetOperatorCondition() { return OperatorCondition.None; }
 
-        public virtual InputState GetInputState()
+        public virtual InputState GetInputState() { return _inputState; }
+
+        public virtual void Press()
+        {
+            lastPressTime = Time.time;
+        }
+        public virtual void Release()
+        {
+            //Debug.Log("elapsed time: " + (Time.time - lastPressTime));
+        }
+        protected float lastPressTime;
+    }
+
+
+
+
+    [System.Serializable]
+    public class DigitalInput : DigitalInputBase
+    {
+        public override DigitalInputBase Clone()
+        {
+            DigitalInput newInput = new DigitalInput();
+            newInput.InputKey = InputKey;
+            return newInput;
+        }
+        public KeyCode InputKey;
+
+        public override void SetInputKey(KeyCode key) { InputKey = key; }
+        public override KeyCode GetInputKey() { return InputKey; }
+
+        public override InputState GetInputState()
         {
             if (Input.GetKeyDown(InputKey))
             {
@@ -69,16 +94,6 @@ namespace Freethware.Inputs
                 _inputState = InputState.Idle;
             return _inputState;
         }
-
-        public virtual void Press()
-        {
-            lastPressTime = Time.time;
-        }
-        public virtual void Release()
-        {
-             //Debug.Log("elapsed time: " + (Time.time - lastPressTime));
-        }
-        protected float lastPressTime;
     }
 
     public enum OperatorCondition
@@ -93,9 +108,9 @@ namespace Freethware.Inputs
     }
 
     [System.Serializable]
-    public class SimulatedDigitalInput : DigitalInput
+    public class SimulatedDigitalInput : DigitalInputBase
     {
-        public override DigitalInput Clone()
+        public override DigitalInputBase Clone()
         {
             SimulatedDigitalInput newInput = new SimulatedDigitalInput();
             newInput.InputString = InputString;
@@ -103,13 +118,11 @@ namespace Freethware.Inputs
             return newInput;
         }
         public override bool IsSimulated() { return true; }
-
+        [AnalogInput]
         public string InputString;
+
         public float ActivationValue = .95f;
         public OperatorCondition Operator = OperatorCondition.Above;
-
-        public override void SetInputKey(KeyCode key) {}
-        public override KeyCode GetInputKey() { return KeyCode.None; }
 
         public override void SetInputString(string ID) { InputString = ID; }
         public override string GetInputString() { return InputString; }

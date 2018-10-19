@@ -21,7 +21,7 @@ namespace Freethware.Inputs
             int length = inputKeys.Count;
             for (int i = 0; i < length; i++)
             {
-                newButton.inputKeys.Add(inputKeys[i].Clone());
+                newButton.inputKeys.Add((DigitalInput)inputKeys[i].Clone());
             }
 
             newButton.inputStrings = new List<SimulatedDigitalInput>();
@@ -80,7 +80,7 @@ namespace Freethware.Inputs
                     break;
             }          
         }
-        protected virtual bool SolveInput(DigitalInput input)
+        protected virtual bool SolveInput(DigitalInputBase input)
         {
             InputState newState = input.GetInputState();
             // Now it depends on the current state and this state. So. Switch

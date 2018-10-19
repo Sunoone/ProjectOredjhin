@@ -17,6 +17,14 @@ namespace StateMachine.Quests
     [CreateAssetMenu(fileName = "NewQuest", menuName = "Quests/NewQuest", order = 1)]
     public class Quest : ScriptableObject
     {
+
+        [EasyButtons.Button("Open quest window")]
+        private void QuestWindow()
+        {
+
+        }
+
+
         public string QuestName;
         public State QuestStateMachine; // If this machine accepts our QuestActivities log, the quest is successful.
         public bool isBlackList; // If true, the inputlist is a blacklist. Otherwise, it's a whitelist.
