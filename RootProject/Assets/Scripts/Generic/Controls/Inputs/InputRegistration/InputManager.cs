@@ -5,6 +5,7 @@ using UnityEngine.Events;
 
 namespace Freethware.Inputs
 {
+    
     public class InputManager : MonoBehaviour
     {
         public List<ButtonProfile> Profiles;

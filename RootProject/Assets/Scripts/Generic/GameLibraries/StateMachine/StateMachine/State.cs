@@ -14,7 +14,7 @@ namespace StateMachine
     }
 
     [System.Serializable]
-    public struct StateMachineResult
+    public struct SM_Input
     {
         public EStateMachineCompletionType CompletionType;
         public State FinalState;
@@ -29,7 +29,7 @@ namespace StateMachine
          * Will start reading input at DataIndex.
          * Will decrement RemainingSteps and automatically fail after it hits 0. */
 
-        public virtual StateMachineResult RunState(object refObject, List<InputUnit> dataSource, int dataIndex = 0, int remainingSteps = -1)
+        public virtual SM_Input RunState(object refObject, List<InputUnit> dataSource, int dataIndex = 0, int remainingSteps = -1)
         {
             bool bMustEndNow = (TerminateImmediately || !dataSource.IsValidIndex(dataIndex));
 
@@ -70,13 +70,13 @@ namespace StateMachine
                 }
                 bMustEndNow = true;
             }
-            StateMachineResult SMR;
+            SM_Input SMR;
             SMR.FinalState = this;
             SMR.DataIndex = dataIndex;
             SMR.CompletionType = bMustEndNow ? CompletionType : EStateMachineCompletionType.OutOfSteps;
             return SMR;
         }
-        protected virtual StateMachineResult LoopState(object refObject, List<InputUnit> dataSource, int dataIndex, int remainingSteps)
+        protected virtual SM_Input LoopState(object refObject, List<InputUnit> dataSource, int dataIndex, int remainingSteps)
         {
             return RunState(refObject, dataSource, dataIndex + 1, remainingSteps - 1);
         }
@@ -84,7 +84,7 @@ namespace StateMachine
         public EStateMachineCompletionType CompletionType; // IF input runs out on this state (or TerminateImmediately is true), this is how the result will be interpreted.   
         public bool TerminateImmediately = false; // A state machine run that enters this state will terminate immediately, regardless of whether or not there is more input data.
         public bool LoopByDefault = true; // If this is set, this state will loop on itself whenever an unhandled input unit is detected.
-        public List<Branch> InstancedBranches; // Branches to other states. These are in priority order, so first successful branch will be taken.
-        public List<Branch> SharedBranches; // Branches to other states. These are in priority order, so first successful branch will be taken.
+        public List<BranchBase> InstancedBranches; // Branches to other states. These are in priority order, so first successful branch will be taken.
+        public List<BranchBase> SharedBranches; // Branches to other states. These are in priority order, so first successful branch will be taken.
     }
 }

@@ -4,6 +4,7 @@ using UnityEngine;
 
 namespace Freethware.Inputs
 {
+   
     [System.Serializable]
     public class AnalogButton : ICloneable<AnalogButton>
     {
@@ -13,41 +14,41 @@ namespace Freethware.Inputs
             //newAnalog.InputString = InputString;
             newAnalog.PlayerButton = PlayerButton;
 
-            newAnalog.inputStrings = new List<AnalogInput>();
-            int length = inputStrings.Count;
+            newAnalog.InputStrings = new List<AnalogInput>();
+            int length = InputStrings.Count;
             for (int i = 0; i < length; i++)
             {
-                newAnalog.inputStrings.Add(inputStrings[i].Clone());
+                newAnalog.InputStrings.Add(InputStrings[i].Clone());
             }
 
-            newAnalog.inputKeys = new List<SimulatedAnalogInput>();
-            length = inputKeys.Count;
+            newAnalog.InputKeys = new List<SimulatedAnalogInput>();
+            length = InputKeys.Count;
             for (int i = 0; i < length; i++)
             {
-                newAnalog.inputKeys.Add((SimulatedAnalogInput)inputKeys[i].Clone());
+                newAnalog.InputKeys.Add((SimulatedAnalogInput)InputKeys[i].Clone());
             }
 
             return newAnalog;
         }
         public Button PlayerButton;   // Identification for the button. Change the enum list for every project
 
-        public List<AnalogInput> inputStrings;       // Allows for as many keys to be assigned to this input as you want
-        public List<SimulatedAnalogInput> inputKeys;
+        public List<AnalogInput> InputStrings;       // Allows for as many keys to be assigned to this input as you want
+        public List<SimulatedAnalogInput> InputKeys;
 
         public float GetAxis()
         {
             float value = 0f;
 
-            int length = inputKeys.Count;
+            int length = InputKeys.Count;
             for (int i = 0; i < length; i++)
             {
-                value += inputKeys[i].GetAxis();
+                value += InputKeys[i].GetAxis();
             }
 
-            length = inputStrings.Count;
+            length = InputStrings.Count;
             for (int i = 0; i < length; i++)
             {
-                value += inputStrings[i].GetAxis();
+                value += InputStrings[i].GetAxis();
             }
             return value;
         }

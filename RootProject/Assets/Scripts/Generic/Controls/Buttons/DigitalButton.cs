@@ -9,7 +9,6 @@ namespace Freethware.Inputs
     /// Because of a lack of that feature, it currently runs everything parralel, and requires both the detection for up and down to be used.
     /// </summary>
 
-
     [System.Serializable]
     public class DigitalButton : ICloneable<DigitalButton>
     {

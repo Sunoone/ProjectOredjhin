@@ -106,7 +106,7 @@ namespace StateMachine.Quests
         {
             if (Quest && (QuestProgress == EQuestCompletion.Started) && Quest.isBlackList != Quest.InputList.Contains(questActivity))
             {
-                StateMachineResult QuestResult;
+                SM_Input QuestResult;
                 QuestActivities.Add(questActivity);
                 QuestResult = Quest.QuestStateMachine.RunState(refObject, QuestActivities);
                 QuestState = QuestResult.FinalState;

@@ -6,46 +6,17 @@ namespace Freethware.Inputs
 {
     public enum Button
     {
-        AxisHorizontal,
-        AxisVertical,
-        Jump,
-        PowerBurn,
-        Block,
-        LightAttack,
-        HeavyAttack,
-        Special,
-        Pause,
-        Help,
-        Taunt
-        /*AxisLeft_Left,
-        AxisLeft_Right,
-        AxisLeft_Up,
-        AxisLeft_Down,
-        AxisLeft_Horizontal,
-        AxisLeft_Vertical,
-
-        AxisRight_Left,
-        AxisRight_Right,
-        AxisRight_Up,
-        AxisRight_Down,
-        AxisRight_Horizontal,
-        AxisRight_Vertical,
-
-        DPad_Left,
-        DPad_Right,
-        DPad_Up,
-        DPad_Down,
-
-        Button1, // Square/X
-        Button2, // Triangle/Y
-        Button3, // X/B
-        Button4, // Circle/A
-
-        LeftShoulder,
-        LeftTrigger,
-
-        RightShould,
-        RightTrigger*/
+        AxisHorizontal = (1 << 0),
+        AxisVertical = (1 << 1),
+        Jump = (1 << 2),
+        PowerBurn = (1 << 3),
+        Block = (1 << 4),
+        LightAttack = (1 << 5),
+        HeavyAttack = (1 << 6),
+        Special = (1 << 7),
+        Pause = (1 << 8),
+        Help = (1 << 9),
+        Taunt = (1 << 10)
     }
 
     [System.Serializable]
@@ -142,6 +113,7 @@ namespace Freethware.Inputs
             return false;
         }
 
+        // Needs support for a full analog stick.
         public float GetAxis(Button button)
         {
             int length = AnalogInputs.Count;

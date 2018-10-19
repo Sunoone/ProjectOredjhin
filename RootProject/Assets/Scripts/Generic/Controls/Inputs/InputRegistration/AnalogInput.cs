@@ -5,6 +5,33 @@ using Freethware.Math;
 
 namespace Freethware.Inputs
 {
+    public enum InputDirection
+    {
+        DownBack,
+        Down,
+        DownForward,
+        Back,
+        Neutral,
+        Forward,
+        UpBack,
+        Up,
+        UpForward,
+        None,
+    }
+    /*public enum InputDirection
+    {
+        DownBack = (1 << 0),
+        Down = (1 << 1),
+        DownForward = (1 << 2),
+        Back = (1 << 3),
+        Neutral = (1 << 4),
+        Forward = (1 << 5),
+        UpBack = (1 << 6),
+        Up = (1 << 7),
+        UpForward = (1 << 8),
+        None = (1 << 9),
+    }*/
+
     /// <summary>
     /// Replace the input string with an analog enum that simply is in sync with the InputManager.asset
     /// </summary>
