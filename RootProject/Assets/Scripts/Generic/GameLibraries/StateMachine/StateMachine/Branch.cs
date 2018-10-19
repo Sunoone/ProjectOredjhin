@@ -8,7 +8,7 @@ namespace StateMachine
     [CreateAssetMenu(fileName = "Branch", menuName = "Quests/Branch", order = 1)]
     public class Branch : BranchBase
     {
-        public Branch(State destinationState) : base(destinationState)
+        public Branch(State destinationState) : base (destinationState)
         {
             DestinationState = destinationState;
         }

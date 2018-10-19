@@ -95,8 +95,6 @@ public class StateEditor : Editor
 
             GUILayout.BeginVertical("Box");
             BranchBase branchBase = state.InstancedBranches[i];
-
-
             branchBase.DestinationState = (State)EditorGUILayout.ObjectField("Destination state", branchBase.DestinationState, typeof(State), true);
 
             if (branchBase.DestinationState != null)
