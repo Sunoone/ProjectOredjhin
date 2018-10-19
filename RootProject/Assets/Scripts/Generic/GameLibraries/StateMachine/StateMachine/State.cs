@@ -84,7 +84,7 @@ namespace StateMachine
         public EStateMachineCompletionType CompletionType; // IF input runs out on this state (or TerminateImmediately is true), this is how the result will be interpreted.   
         public bool TerminateImmediately = false; // A state machine run that enters this state will terminate immediately, regardless of whether or not there is more input data.
         public bool LoopByDefault = true; // If this is set, this state will loop on itself whenever an unhandled input unit is detected.
-        public List<Branch> InstancedBranches; // Branches to other states. These are in priority order, so first successful branch will be taken.
-        public List<Branch> SharedBranches; // Branches to other states. These are in priority order, so first successful branch will be taken.
+        public List<BranchBase> InstancedBranches; // Branches to other states. These are in priority order, so first successful branch will be taken.
+        public List<BranchBase> SharedBranches; // Branches to other states. These are in priority order, so first successful branch will be taken.
     }
 }

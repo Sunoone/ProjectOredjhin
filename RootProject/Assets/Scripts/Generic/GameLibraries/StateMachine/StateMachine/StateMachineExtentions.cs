@@ -4,7 +4,7 @@ using UnityEngine;
 using StateMachine;
 
 public static class StateMachineExtentions  {
-    public static int ContainsState(this List<Branch> list, State state)
+    /*public static int ContainsState(this List<Branch> list, State state)
     {
         int length = list.Count;
         for (int i = 0; i < length; i++)
@@ -69,5 +69,5 @@ public static class StateMachineExtentions  {
             }
         }
         return branchList;
-    }
+    }*/
 }

@@ -83,7 +83,7 @@ public class StateEditor : Editor
     
     private void ShowBranches() {
         if (state.InstancedBranches == null)
-            state.InstancedBranches = new List<Branch>(0);
+            state.InstancedBranches = new List<BranchBase>(0);
 
 
         int length = state.InstancedBranches.Count;
@@ -94,32 +94,36 @@ public class StateEditor : Editor
                 break;
 
             GUILayout.BeginVertical("Box");
-            Branch branch = state.InstancedBranches[i];
-            branch.DestinationState = (State)EditorGUILayout.ObjectField("Destination state", branch.DestinationState, typeof(State), true);
+            BranchBase branchBase = state.InstancedBranches[i];
+            branchBase.DestinationState = (State)EditorGUILayout.ObjectField("Destination state", branchBase.DestinationState, typeof(State), true);
 
-            if (branch.DestinationState != null)
+            if (branchBase.DestinationState != null)
             {
-                branch.ReverseInput = EditorGUILayout.Toggle("Reverse Input ", branch.ReverseInput);
-
-                GUILayout.BeginVertical("Box");
-                int acceptedLength = branch.AcceptableInputs.Count;
-                for (int e = 0; e < acceptedLength; e++)
+                Branch branch = (Branch)branchBase;
+                if (branch != null)
                 {
+                    branch.ReverseInput = EditorGUILayout.Toggle("Reverse Input ", branch.ReverseInput);
+
+                    GUILayout.BeginVertical("Box");
+                    int acceptedLength = branch.AcceptableInputs.Count;
+                    for (int e = 0; e < acceptedLength; e++)
+                    {
+                        GUILayout.BeginHorizontal();
+                        branch.AcceptableInputs[e] = (InputUnit)EditorGUILayout.ObjectField("Input Unit", branch.AcceptableInputs[e], typeof(InputUnit), true);
+                        if (GUILayout.Button(deleteButtonContent))
+                            branch.AcceptableInputs.RemoveAt(e);
+                        GUILayout.EndHorizontal();
+                    }
+
                     GUILayout.BeginHorizontal();
-                    branch.AcceptableInputs[e] = (InputUnit)EditorGUILayout.ObjectField("Input Unit", branch.AcceptableInputs[e], typeof(InputUnit), true);
-                    if (GUILayout.Button(deleteButtonContent))
-                        branch.AcceptableInputs.RemoveAt(e);
+                    GUILayout.Label("Add accepted input");
+                    if (GUILayout.Button(duplicateButtonContent))
+                        branch.AcceptableInputs.Add(default(InputUnit));
+
+
                     GUILayout.EndHorizontal();
+                    GUILayout.EndVertical();
                 }
-
-                GUILayout.BeginHorizontal();
-                GUILayout.Label("Add accepted input");
-                if (GUILayout.Button(duplicateButtonContent))
-                    branch.AcceptableInputs.Add(default(InputUnit));
-
-
-                GUILayout.EndHorizontal();
-                GUILayout.EndVertical();
             }
             if (GUILayout.Button(deleteButtonContent))
                 state.InstancedBranches.RemoveAt(i);
