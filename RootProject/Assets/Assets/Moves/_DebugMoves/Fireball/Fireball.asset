@@ -15,4 +15,5 @@ MonoBehaviour:
   PlaceHolder: {fileID: 0}
   ClearInputOnEntry: 0
   ClearInputOnExit: 0
-  LinkedMoves: []
+  LinkedMoves:
+  - {fileID: 11400000, guid: af3ae3ab032f3da4ebda360f3dc819a8, type: 2}

@@ -16,4 +16,6 @@ MonoBehaviour:
   ClearInputOnEntry: 0
   ClearInputOnExit: 0
   LinkedMoves:
+  - {fileID: 11400000, guid: 40f66816a0b1aed40ae175525a1e4378, type: 2}
+  - {fileID: 11400000, guid: 49aedd5fd4b5249468baff1db22df298, type: 2}
   - {fileID: 11400000, guid: 536662111efc3db49806b148d36bc254, type: 2}

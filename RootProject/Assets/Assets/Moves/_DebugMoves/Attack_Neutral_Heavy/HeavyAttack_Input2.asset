@@ -9,9 +9,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7c953842fba7ee74c93c28cd97a8f284, type: 3}
-  m_Name: LightAttack_Input
+  m_Name: HeavyAttack_Input2
   m_EditorClassIdentifier: 
   DestinationState: {fileID: 11400000, guid: e140005e54dd0c84ea24cb964f7ccc9a, type: 2}
-  RequiredButtons: 4
+  RequiredButtons: 0
   ForbiddenButtons: 0
-  AcceptableDirections: -1
+  AcceptableDirections: 36

@@ -568,6 +568,8 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 979c0072df3bdd44c93c1760c1e9c34a, type: 2}
   - {fileID: 11400000, guid: 10ddde97dff496744b7d5735a8c2002a, type: 2}
   buttonUnits: []
+  StickCount: 1
+  ButtonCount: 8
   InputStream: []
   InputTimeStamps: []
   InputExpirationTime: 30

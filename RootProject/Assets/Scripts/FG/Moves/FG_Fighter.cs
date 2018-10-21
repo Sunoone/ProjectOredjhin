@@ -27,8 +27,8 @@ public class FG_Fighter : MonoBehaviour
     public List<Controls_ButtonUnit> ButtonUnits;
     [ReadOnly] public List<Controls_ButtonUnit> buttonUnits;
 
-    public static int StickCount = 1;
-    public static int ButtonCount = 8;
+    public int StickCount = 1;
+    public int ButtonCount = 8;
 
     private bool init;
     private void Init()
@@ -38,12 +38,14 @@ public class FG_Fighter : MonoBehaviour
             Profile = IM.DefaultProfiles[0];
 
             int length = ButtonUnits.Count;
-            Debug.Log("Length: " + length);
-            ButtonCount = length;
+            Debug.Log("Length: " + length);    
             for (int i = 0; i < length; i++)
             {
                 buttonUnits.Add(Instantiate(ButtonUnits[i]));
-            }      
+            }
+
+            ButtonCount = length;
+            StickCount = 1;
             init = true;
         }
     }
@@ -164,10 +166,10 @@ public class FG_Fighter : MonoBehaviour
             DigitalButton button = Profile.GetButton(ButtonUnits[i]);
             InputState buttonState = button.GetInputState();
             buttonUnits[i].InputState = buttonState;
-            if (buttonState == InputState.Down)
+            /*if (buttonState == InputState.Down)
             {
                 Debug.Log("Pressed: " + button.Button.name);
-            }
+            }*/
             InputStream.Add(buttonUnits[i]);
         }
     }
@@ -197,9 +199,9 @@ public class FG_Fighter : MonoBehaviour
     private bool LinkMove()
     {
         FG_MoveLinkToFollow MoveLinkToFollow = CurrentMove.TryLinks(this, InputStream);
-        if (MoveLinkToFollow != null && MoveLinkToFollow.Link != null)
+        if (MoveLinkToFollow != null && MoveLinkToFollow.SMR.CompletionType == StateMachine.EStateMachineCompletionType.Accepted)
         {
-            Debug.Log("Switch to state: " + MoveLinkToFollow.Link.Move.MoveName);
+            //Debug.Log("Switch to state: " + MoveLinkToFollow.Link.Move.MoveName);
             if (MoveLinkToFollow.Link.ClearInput || MoveLinkToFollow.Link.Move.ClearInputOnEntry || CurrentMove.ClearInputOnExit)
             {
                 InputTimeStamps.Clear();
@@ -217,7 +219,7 @@ public class FG_Fighter : MonoBehaviour
             }
             CurrentMove = MoveLinkToFollow.Link.Move;
             TimeInCurrentMove = 0.0f;
-            Debug.LogWarning("Attempting to do move: " + ((CurrentMove == null) ? "NULL" :  CurrentMove.MoveName.ToString()));
+            //Debug.LogWarning("Attempting to do move: " + ((CurrentMove == null) ? "NULL" :  CurrentMove.MoveName.ToString()));
             DoMove(CurrentMove);
             return true;
         }

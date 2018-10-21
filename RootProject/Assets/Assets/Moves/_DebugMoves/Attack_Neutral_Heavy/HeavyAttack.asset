@@ -11,8 +11,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c33bbfb4fe4e81249b7f9f6a45ce1f07, type: 3}
   m_Name: HeavyAttack
   m_EditorClassIdentifier: 
-  MoveName: Attacking Heavily
+  MoveName: Attacking Lightly
   PlaceHolder: {fileID: 0}
   ClearInputOnEntry: 0
   ClearInputOnExit: 0
-  LinkedMoves: []
+  LinkedMoves:
+  - {fileID: 11400000, guid: f9c86188b75d1154db02ca2981fc3764, type: 2}

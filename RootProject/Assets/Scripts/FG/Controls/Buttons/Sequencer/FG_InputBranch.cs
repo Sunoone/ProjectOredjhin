@@ -17,18 +17,25 @@ public class FG_InputBranch : SM_BranchBase {
     }
 
     public override SM_State TryBranch(object refObject, List<InputUnit> dataSource, int dataIndex, out int outDataIndex)
-    {
+    {      
         outDataIndex = dataIndex;
 
-        if (RequiredButtons == (ForbiddenButtons & RequiredButtons))
+        if (RequiredButtons != 0 && RequiredButtons == (ForbiddenButtons & RequiredButtons))
         {
             Debug.LogError("Error: Required button is also forbidden.");
             return null;
         }
 
-        if (dataIndex + FG_Fighter.ButtonCount >= dataSource.Count)
+        FG_Fighter fighter = refObject as FG_Fighter;
+        if (fighter == null)
         {
-            Debug.LogError("Error: Not enough data.");
+            Debug.LogError("Error: Cast invalid");
+            return null;
+        }
+        // Can make this character dependant. Just cast the refObject and use the fighter's data.
+        if (dataIndex + fighter.ButtonCount >= dataSource.Count)
+        {
+            Debug.LogError("Error: Not enough data: " + dataIndex + " + " + fighter.ButtonCount + " >= " + (dataSource.Count));
             return null;
         }
 
@@ -40,7 +47,7 @@ public class FG_InputBranch : SM_BranchBase {
             if (accepted != -1 && input != (accepted & input))
             {
                 return null;
-            }
+            }           
         }
         else
         {
@@ -51,37 +58,37 @@ public class FG_InputBranch : SM_BranchBase {
         outDataIndex++;
 
         bool bRequiredButtonPressed = false;
-        for (int i = 0; i < FG_Fighter.ButtonCount; i++, outDataIndex++)
+        for (int i = 0; i < fighter.ButtonCount; i++, outDataIndex++)
         {
             Controls_ButtonUnit buttonUnit = dataSource[outDataIndex] as Controls_ButtonUnit;
-            if (buttonUnit == null)
-                continue;
-
-            Debug.Log("Button: " + (1 << i) + ", count: " + FG_Fighter.ButtonCount);
-            if (RequiredButtons == (RequiredButtons & (1<<i)))
-            { 
-                if (buttonUnit.InputState == InputState.Down)
-                {
-                    bRequiredButtonPressed = true;
-                    continue;
-                }
-                else if (buttonUnit.InputState == InputState.Hold)
-                {
-                    continue;
-                }
-                return null;
-            }
-            else if(i == (ForbiddenButtons & (1<<i)))
+            if (buttonUnit != null)
             {
-                if (buttonUnit.InputState != InputState.Down)
+                //Debug.Log("Button: " + (1 << i) + ", count: " + FG_Fighter.ButtonCount);
+                if (RequiredButtons == (RequiredButtons & (1 << i)))
                 {
-                    continue;
+                    if (buttonUnit.InputState == InputState.Down)
+                    {
+                        bRequiredButtonPressed = true;
+                        continue;
+                    }
+                    else if (buttonUnit.InputState == InputState.Hold)
+                    {
+                        continue;
+                    }
+                    return null;
                 }
-                return null;
+                else if (i == (ForbiddenButtons & (1 << i)))
+                {
+                    if (buttonUnit.InputState != InputState.Down)
+                    {
+                        continue;
+                    }
+                    return null;
+                }
             }
             else
             {
-                Debug.LogError("Error: Expected " + FG_Fighter.ButtonCount + " button inputs, only found " + i);
+                Debug.LogError("Error: Expected " + fighter.ButtonCount + " button inputs, only found " + i);
                 return null;
             }
         }

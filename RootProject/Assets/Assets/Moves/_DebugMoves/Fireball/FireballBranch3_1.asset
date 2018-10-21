@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Name: FireballBranch3_1
   m_EditorClassIdentifier: 
   DestinationState: {fileID: 11400000, guid: e140005e54dd0c84ea24cb964f7ccc9a, type: 2}
-  RequiredButtons: 0
+  RequiredButtons: 2
   ForbiddenButtons: 0
   AcceptableDirections: 288

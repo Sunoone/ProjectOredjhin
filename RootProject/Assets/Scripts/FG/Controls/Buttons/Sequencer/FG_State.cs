@@ -8,13 +8,9 @@ using StateMachine;
 [CreateAssetMenu(fileName = "FG_State", menuName = "FG/Component/State", order = 1)]
 public class FG_State : SM_State {
 
-    // Hardcoded number: Sticks required in game
-
-
-
-
     protected override SM_StateMachineResult LoopState(object refObject, List<InputUnit> dataSource, int dataIndex, int remainingSteps)
-    {       
-        return RunState(refObject, dataSource, dataIndex + 1 + FG_Fighter.StickCount, remainingSteps - 1);
+    {
+        FG_Fighter fighter = refObject as FG_Fighter;
+        return RunState(refObject, dataSource, dataIndex + fighter.StickCount + fighter.ButtonCount, remainingSteps - 1);
     }
 }
