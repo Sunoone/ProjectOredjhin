@@ -15,20 +15,20 @@ namespace Freethware.Inputs
         public DigitalButton Clone()
         {
             DigitalButton newButton = new DigitalButton();
-            newButton.PlayerButton = PlayerButton;
+            newButton.Button = Button;
 
-            newButton.inputKeys = new List<DigitalInput>();
+            newButton.inputKeys = new List<Input_Digital>();
             int length = inputKeys.Count;
             for (int i = 0; i < length; i++)
             {
-                newButton.inputKeys.Add((DigitalInput)inputKeys[i].Clone());
+                newButton.inputKeys.Add((Input_Digital)inputKeys[i].Clone());
             }
 
-            newButton.inputStrings = new List<SimulatedDigitalInput>();
-            length = inputStrings.Count;
+            newButton.InputAxis = new List<Input_Digital_Simulated>();
+            length = InputAxis.Count;
             for (int i = 0; i < length; i++)
             {
-                newButton.inputStrings.Add((SimulatedDigitalInput)inputStrings[i].Clone());
+                newButton.InputAxis.Add((Input_Digital_Simulated)InputAxis[i].Clone());
             }
 
 
@@ -37,9 +37,9 @@ namespace Freethware.Inputs
             return newButton;
         }
 
-        public Button PlayerButton;   // Identification for the button. Change the enum list for every project
-        public List<DigitalInput> inputKeys;       // Allows for as many keys to be assigned to this input as you want
-        public List<SimulatedDigitalInput> inputStrings;
+        public Controls_ButtonUnit Button;   // Identification for the button. Change the enum list for every project
+        public List<Input_Digital> inputKeys;       // Allows for as many keys to be assigned to this input as you want
+        public List<Input_Digital_Simulated> InputAxis;
         public bool singleInput = true;     // When a digitalinput is already pressed and being held, it cannot return true when another digital input is being pressed or released
 
         protected InputState _inputState;
@@ -62,11 +62,10 @@ namespace Freethware.Inputs
                             return;
                     }
 
-
-                    length = inputStrings.Count;
+                    length = InputAxis.Count;
                     for (int i = 0; i < length; i++)
                     {
-                        if (SolveInput(inputStrings[i]))
+                        if (SolveInput(InputAxis[i]))
                             return;
                     }
                     break;
@@ -80,7 +79,13 @@ namespace Freethware.Inputs
                     break;
             }          
         }
-        protected virtual bool SolveInput(DigitalInputBase input)
+        private float timeStamp;
+        private float holdDuration;
+
+        public float GetTimeStamp() { return timeStamp; }
+        public float GetHoldDuration() { return holdDuration; }
+
+        protected virtual bool SolveInput(Input_Digital_Base input)
         {
             InputState newState = input.GetInputState();
             // Now it depends on the current state and this state. So. Switch
@@ -89,6 +94,7 @@ namespace Freethware.Inputs
                 case InputState.Idle:
                     if (newState == InputState.Down)
                     {
+                        timeStamp = Time.time;
                         _inputState = InputState.Down;
                         return true;
                     }
@@ -116,13 +122,13 @@ namespace Freethware.Inputs
                                 }
                             }
 
-                            length = inputStrings.Count;
+                            length = InputAxis.Count;
                             for (int i = 0; i < length; i++)
                             {
-                                if (inputStrings[i] == input)
+                                if (InputAxis[i] == input)
                                     continue;
 
-                                if (inputStrings[i].GetInputState() == InputState.Hold)
+                                if (InputAxis[i].GetInputState() == InputState.Hold)
                                 {
                                     otherConditions = true;                         // Another key is already being pressed.
                                 }
@@ -130,6 +136,8 @@ namespace Freethware.Inputs
                         }
                         if (!otherConditions)
                         {
+                            holdDuration = Time.time - timeStamp;
+                            timeStamp = 0f;
                             _inputState = InputState.Up;
                             return true;
                         }
@@ -141,7 +149,7 @@ namespace Freethware.Inputs
             return false;
         }
 
-        public virtual DigitalInput GetCustomInputForKey(KeyCode key)
+        public virtual Input_Digital GetCustomInputForKey(KeyCode key)
         {
             int length = inputKeys.Count;
             for (int i = 0; i < length; i++)

@@ -9,7 +9,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 532548d7e112495408c1ba6c6322eea0, type: 3}
-  m_Name: FirstState
+  m_Name: TQ_Start
   m_EditorClassIdentifier: 
   CompletionType: 0
   TerminateImmediately: 0

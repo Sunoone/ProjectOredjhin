@@ -6,17 +6,19 @@ namespace Freethware.Inputs
 {
     public enum Button
     {
-        AxisHorizontal = (1 << 0),
-        AxisVertical = (1 << 1),
-        Jump = (1 << 2),
-        PowerBurn = (1 << 3),
-        Block = (1 << 4),
-        LightAttack = (1 << 5),
-        HeavyAttack = (1 << 6),
-        Special = (1 << 7),
-        Pause = (1 << 8),
-        Help = (1 << 9),
-        Taunt = (1 << 10)
+        Jump = (1 << 0),
+        PowerBurn = (1 << 1),
+        Block = (1 << 2),
+        LightAttack = (1 << 3),
+        HeavyAttack = (1 << 4),
+        Special = (1 << 5),
+        Pause = (1 << 6),
+        Help = (1 << 7),
+        Taunt = (1 << 8),
+        Down = (1 << 9),
+        Left = (1 << 10),
+        Up = (1 << 11),
+        Right = (1 << 12),
     }
 
     [System.Serializable]
@@ -24,21 +26,18 @@ namespace Freethware.Inputs
     {
         public string ProfileName;
 
-        public List<DigitalButton> DigitalInputs;
-        
-        public List<AnalogButton> AnalogInputs;
+        public List<DigitalButton> DigitalButtons;      
+        public List<AnalogDirection> AnalogDirections;
 
         public bool AllowDuplicates; // Duplicates allows the same input to be used for multiple actions.
         public bool Deletable = true;
 
-    
-
-        public DigitalInput GetCustomInputForKey(KeyCode key)
+        public Input_Digital GetCustomInputForKey(KeyCode key)
         {
-            int length = DigitalInputs.Count;
+            int length = DigitalButtons.Count;
             for (int i = 0; i < length; i++)
             {
-                DigitalInput customInput = DigitalInputs[i].GetCustomInputForKey(key);
+                Input_Digital customInput = DigitalButtons[i].GetCustomInputForKey(key);
                 if (customInput != null)
                     return customInput;
             }
@@ -63,66 +62,136 @@ namespace Freethware.Inputs
 
         public void RunInput()
         {
-            int length = DigitalInputs.Count;
+            int length = DigitalButtons.Count;
             for (int i = 0; i < length; i++)
             {
-                DigitalInputs[i].RunInputs();
+                DigitalButtons[i].RunInputs();
             }
         }
 
-
-        public InputState GetButtonState(Button button)
+        public DigitalButton GetButton(Controls_ButtonUnit button)
         {
-            int length = DigitalInputs.Count;
+            int length = DigitalButtons.Count;
             for (int i = 0; i < length; i++)
             {
-                if (DigitalInputs[i].PlayerButton == button)
-                    return DigitalInputs[i].GetInputState();
+                if (DigitalButtons[i].Button == button)
+                    return DigitalButtons[i];
+            }
+            return null;
+        }
+
+        public DigitalButton GetButton(string ID)
+        {
+            int length = DigitalButtons.Count;
+            for (int i = 0; i < length; i++)
+            {
+                if (DigitalButtons[i].Button.ToString() == ID)
+                    return DigitalButtons[i];
+            }
+            return null;
+        }
+
+        public InputState GetButtonState(Controls_ButtonUnit button)
+        {
+            int length = DigitalButtons.Count;
+            for (int i = 0; i < length; i++)
+            {
+                if (DigitalButtons[i].Button == button)
+                    return DigitalButtons[i].GetInputState();
             }
             return InputState.None;
         }
 
-        public bool GetButtonDown(Button button)
+        public InputState GetButtonState(Controls_ButtonUnit button, ref float holdDuration)
         {
-            int length = DigitalInputs.Count;
+            int length = DigitalButtons.Count;
             for (int i = 0; i < length; i++)
             {
-                if (DigitalInputs[i].PlayerButton == button)
-                    return DigitalInputs[i].GetButtonDown();
+                if (DigitalButtons[i].Button == button)
+                {
+                    InputState buttonState = DigitalButtons[i].GetInputState();
+                    if (buttonState == InputState.Up)
+                        holdDuration = DigitalButtons[i].GetHoldDuration();
+                    return buttonState;
+                }           
+            }
+            return InputState.None;
+        }
+
+        public bool GetButtonDown(Controls_ButtonUnit button)
+        {
+            int length = DigitalButtons.Count;
+            for (int i = 0; i < length; i++)
+            {
+                if (DigitalButtons[i].Button == button)
+                    return DigitalButtons[i].GetButtonDown();
             }
             return false;
         }
-        public bool GetButtonUp(Button button)
+        public bool GetButtonUp(Controls_ButtonUnit button)
         {
-            int length = DigitalInputs.Count;
+            int length = DigitalButtons.Count;
             for (int i = 0; i < length; i++)
             {
-                if (DigitalInputs[i].PlayerButton == button)
-                    return DigitalInputs[i].GetButtonUp();
+                if (DigitalButtons[i].Button == button)
+                    return DigitalButtons[i].GetButtonUp();
             }
             return false;
         }
-        public bool GetButton(Button button)
+        public bool GetButton(Controls_ButtonUnit button, ref float duration)
         {
-            int length = DigitalInputs.Count;
+            int length = DigitalButtons.Count;
             for (int i = 0; i < length; i++)
             {
-                if (DigitalInputs[i].PlayerButton == button)
-                    return DigitalInputs[i].GetButton();
+                if (DigitalButtons[i].Button == button)
+                {
+                    duration = DigitalButtons[i].GetHoldDuration();
+                    return DigitalButtons[i].GetButton();
+                }
             }
             return false;
         }
 
         // Needs support for a full analog stick.
-        public float GetAxis(Button button)
+        public Vector2 GetAxis()
         {
-            int length = AnalogInputs.Count;
+            Vector2 axis = Vector2.zero;
+            int length = AnalogDirections.Count;
             for (int i = 0; i < length; i++)
             {
-                if (AnalogInputs[i].PlayerButton == button)
-                    return AnalogInputs[i].GetAxis();
+                if (AnalogDirections[i].Axis == AnalogAxis.Horizontal)
+                {
+                    axis.x = AnalogDirections[i].GetAxis();
+                    continue;
+                }
+                axis.y = AnalogDirections[i].GetAxis();
             }
-            return 0f;
+
+            // Currently disabled, but will make it easier to solve all the mixed inputs (upback, etc)
+            /*length = DigitalButtons.Count;
+            for (int i = 0; i < length; i++)
+            {
+                switch (DigitalButtons[i].Button)
+                {
+                    case Button.Down:
+                        axis.y -= 1;
+                        break;
+                    case Button.Left:
+                        axis.x -= 1;
+                        break;
+                    case Button.Up:
+                        axis.y += 1;
+                        break;
+                    case Button.Right:
+                        axis.x += 1;
+                        break;
+                    default:
+                        break;
+                }
+            }*/
+            axis.x = Mathf.Clamp(axis.x, -1, 1);
+            axis.y = Mathf.Clamp(axis.y, -1, 1);
+            return axis;
         }
 
 
@@ -132,18 +201,18 @@ namespace Freethware.Inputs
             ButtonProfile newProfile = new ButtonProfile();
             newProfile.ProfileName = "NewProfile";
 
-            newProfile.DigitalInputs = new List<DigitalButton>();
-            int length = DigitalInputs.Count;
+            newProfile.DigitalButtons = new List<DigitalButton>();
+            int length = DigitalButtons.Count;
             for (int i = 0; i < length; i++)
             {
-                newProfile.DigitalInputs.Add(DigitalInputs[i].Clone());
+                newProfile.DigitalButtons.Add(DigitalButtons[i].Clone());
             }
 
-            newProfile.AnalogInputs = new List<AnalogButton>();
-            length = AnalogInputs.Count;
+            newProfile.AnalogDirections = new List<AnalogDirection>();
+            length = AnalogDirections.Count;
             for (int i = 0; i < length; i++)
             {
-                newProfile.AnalogInputs.Add(AnalogInputs[i].Clone());
+                newProfile.AnalogDirections.Add(AnalogDirections[i].Clone());
             }
 
             newProfile.AllowDuplicates = AllowDuplicates;

@@ -26,7 +26,9 @@ public class Fighter : MonoBehaviour {
         InputProfile = InputManager.DefaultProfiles[0];
 
     }
-	
+
+    public Controls_ButtonUnit Jump;
+
 	// Update is called once per frame
 	void Update ()
     {
@@ -54,7 +56,7 @@ public class Fighter : MonoBehaviour {
         if (controller.isGrounded)
         {
             verticalVelocity = -1;
-            if (InputProfile.GetButtonDown(Button.Jump))
+            if (InputProfile.GetButtonDown(Jump))
                 verticalVelocity = 10;
         }
         else
@@ -63,7 +65,7 @@ public class Fighter : MonoBehaviour {
         }
 
         moveVector = Vector3.zero;
-        moveVector.x = InputProfile.GetAxis(Button.AxisHorizontal) * MoveSpeed;
+        //moveVector.x = //InputProfile.GetAxis(Button.AxisHorizontal) * MoveSpeed;
         moveVector.y = verticalVelocity;
 
         controller.Move(moveVector * Time.deltaTime);

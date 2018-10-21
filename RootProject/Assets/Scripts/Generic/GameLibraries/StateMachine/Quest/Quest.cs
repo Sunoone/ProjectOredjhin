@@ -17,16 +17,8 @@ namespace StateMachine.Quests
     [CreateAssetMenu(fileName = "NewQuest", menuName = "Quests/NewQuest", order = 1)]
     public class Quest : ScriptableObject
     {
-
-        [EasyButtons.Button("Open quest window")]
-        private void QuestWindow()
-        {
-
-        }
-
-
         public string QuestName;
-        public State QuestStateMachine; // If this machine accepts our QuestActivities log, the quest is successful.
+        public SM_State QuestStateMachine; // If this machine accepts our QuestActivities log, the quest is successful.
         public bool isBlackList; // If true, the inputlist is a blacklist. Otherwise, it's a whitelist.
         public List<InputUnit> InputList; // The blacklist/whitelist used to filter InputUnity this quest recognizes.
         public bool PriorityQuest;
@@ -45,18 +37,18 @@ namespace StateMachine.Quests
 
     public class Info
     {
-        public Info(Quest quest, State state, InputUnit inputUnit)
+        public Info(Quest quest, SM_State state, InputUnit inputUnit)
         {
             Quest = quest;
             QuestState = state;
             QuestInputUnit = inputUnit;
         }
         public Quest Quest;
-        public State QuestState;
-        public State LastState;
+        public SM_State QuestState;
+        public SM_State LastState;
         public InputUnit QuestInputUnit;
 
-        public void UpdateQuestProgressionInfo(Quest quest, State state, InputUnit inputUnit)
+        public void UpdateQuestProgressionInfo(Quest quest, SM_State state, InputUnit inputUnit)
         {
             LastState = QuestState;
             Quest = quest;
@@ -84,8 +76,8 @@ namespace StateMachine.Quests
         public EQuestCompletion QuestProgress;
         public List<InputUnit> QuestActivities = new List<InputUnit>();
 
-        private State questState;
-        public State QuestState
+        private SM_State questState;
+        public SM_State QuestState
         {
             get { return (questState) ? questState : Quest.QuestStateMachine; }
             set { questState = value; }
@@ -114,7 +106,7 @@ namespace StateMachine.Quests
         {
             if (Quest && (QuestProgress == EQuestCompletion.Started) && Quest.isBlackList != Quest.InputList.Contains(questActivity))
             {
-                SM_Input QuestResult;
+                SM_StateMachineResult QuestResult;
                 QuestActivities.Add(questActivity);
                 QuestResult = Quest.QuestStateMachine.RunState(refObject, QuestActivities);
                 QuestState = QuestResult.FinalState;

@@ -11,13 +11,13 @@ public class Startup
     {
         Debug.Log("Up and running");
         UtilitiesEditor.GetAllInstances<InputUnit>();
-        UtilitiesEditor.GetAllInstances<State>();
+        UtilitiesEditor.GetAllInstances<SM_State>();
     }
 }
 
 
 [CanEditMultipleObjects]
-[CustomEditor(typeof(State), true)]
+[CustomEditor(typeof(SM_State), true)]
 public class StateEditor : Editor
 {
 
@@ -31,7 +31,7 @@ public class StateEditor : Editor
 
     //SerializedProperty InstancedBranches;
 
-    State state = null;
+    SM_State state = null;
 
     static bool showTileEditor = false;
     float boxSize = 65f;
@@ -44,7 +44,7 @@ public class StateEditor : Editor
     static bool init = false;
     private void Init()
     {
-        state = (State)target;
+        state = (SM_State)target;
 
         completionType = serializedObject.FindProperty("CompletionType");
         teminateImmediately = serializedObject.FindProperty("TerminateImmediately");
@@ -83,7 +83,7 @@ public class StateEditor : Editor
     
     private void ShowBranches() {
         if (state.InstancedBranches == null)
-            state.InstancedBranches = new List<BranchBase>(0);
+            state.InstancedBranches = new List<SM_BranchBase>(0);
 
 
         int length = state.InstancedBranches.Count;
@@ -94,8 +94,8 @@ public class StateEditor : Editor
                 break;
 
             GUILayout.BeginVertical("Box");
-            BranchBase branchBase = state.InstancedBranches[i];
-            branchBase.DestinationState = (State)EditorGUILayout.ObjectField("Destination state", branchBase.DestinationState, typeof(State), true);
+            SM_BranchBase branchBase = state.InstancedBranches[i];
+            branchBase.DestinationState = (SM_State)EditorGUILayout.ObjectField("Destination state", branchBase.DestinationState, typeof(SM_State), true);
 
             if (branchBase.DestinationState != null)
             {

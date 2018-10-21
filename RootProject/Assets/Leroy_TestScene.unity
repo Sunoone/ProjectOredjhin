@@ -189,11 +189,11 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 63046952}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 4.81, y: 1, z: -10}
+  m_LocalPosition: {x: 0, y: 1, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 470506601}
-  m_RootOrder: 4
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &63046957
 MonoBehaviour:
@@ -362,7 +362,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &416122390
 GameObject:
@@ -405,6 +405,7 @@ GameObject:
   - component: {fileID: 470506598}
   - component: {fileID: 470506597}
   - component: {fileID: 470506602}
+  - component: {fileID: 470506603}
   m_Layer: 0
   m_Name: Player1
   m_TagString: Untagged
@@ -496,9 +497,8 @@ Transform:
   - {fileID: 898421982}
   - {fileID: 1896002301}
   - {fileID: 958380708}
-  - {fileID: 63046956}
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &470506602
 MonoBehaviour:
@@ -506,7 +506,7 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 470506596}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: abff127e5a8ed1347b2b016360240ba8, type: 3}
   m_Name: 
@@ -514,14 +514,63 @@ MonoBehaviour:
   InputManager: {fileID: 1296036345}
   InputProfile:
     ProfileName: 
-    DigitalInputs: []
-    AnalogInputs: []
+    DigitalButtons: []
+    AnalogDirections: []
     AllowDuplicates: 0
     Deletable: 1
   MoveSpeed: 10
   attackHitboxes:
   - {fileID: 678333471}
   - {fileID: 644400567}
+  Jump: {fileID: 0}
+--- !u!114 &470506603
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 470506596}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 91390d2b83db1ef4fa77dec34b935162, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CurrentMove: {fileID: 11400000, guid: dce519e818361f14b8b2eef43e2ad07e, type: 2}
+  CalibratedCenter: {x: 0, y: 0}
+  IM: {fileID: 1296036345}
+  Profile:
+    ProfileName: 
+    DigitalButtons: []
+    AnalogDirections: []
+    AllowDuplicates: 0
+    Deletable: 1
+  DirectionDownBackUnit: {fileID: 11400000, guid: 14a703ca604e23d4a9cfa3c874904051,
+    type: 2}
+  DirectionDownUnit: {fileID: 11400000, guid: a5255d950a460ac42b27b5d22ac04507, type: 2}
+  DirectionDownForwardUnit: {fileID: 11400000, guid: 66383f7e1683cd54e9210c8753736c5a,
+    type: 2}
+  DirectionBackUnit: {fileID: 11400000, guid: ffdef96635505e945a2fa9d6f83758af, type: 2}
+  DirectionNeutralUnit: {fileID: 11400000, guid: 7697e32dec29ec241b892868c5ea9a79,
+    type: 2}
+  DirectionForwardUnit: {fileID: 11400000, guid: ba2b7e5e89a5b4b49ae56c8a405589be,
+    type: 2}
+  DirectionUpBackUnit: {fileID: 11400000, guid: e7bb7558f5806854ca3128d520e0a31f,
+    type: 2}
+  DirectionUpUnit: {fileID: 11400000, guid: 23ef4aa36253ba440b444814f7ac7457, type: 2}
+  DirectionUpForwardUnit: {fileID: 11400000, guid: 761f2f55f27ffd54591e8be3f61c7016,
+    type: 2}
+  ButtonUnits:
+  - {fileID: 11400000, guid: 0ae7ecfa66bfe8f42820db7aa1170d2a, type: 2}
+  - {fileID: 11400000, guid: 3575028a974f91a42bf48e23ef2470ff, type: 2}
+  - {fileID: 11400000, guid: 0b9b4976786004f478a750d9283750ec, type: 2}
+  - {fileID: 11400000, guid: c67cd5f8c0cb77642b8c7c3451f83612, type: 2}
+  - {fileID: 11400000, guid: 9c75a59ee4726d841ad5efbf37c2d70c, type: 2}
+  - {fileID: 11400000, guid: 76e82cdcf69d88a43a77701b98435659, type: 2}
+  - {fileID: 11400000, guid: 979c0072df3bdd44c93c1760c1e9c34a, type: 2}
+  - {fileID: 11400000, guid: 10ddde97dff496744b7d5735a8c2002a, type: 2}
+  buttonUnits: []
+  InputStream: []
+  InputTimeStamps: []
+  InputExpirationTime: 30
 --- !u!1 &597839301
 GameObject:
   m_ObjectHideFlags: 0
@@ -530,7 +579,6 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 597839303}
-  - component: {fileID: 597839302}
   m_Layer: 0
   m_Name: GameObject
   m_TagString: Untagged
@@ -538,31 +586,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &597839302
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 597839301}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3d0bd5ce2652d20429b15a1042ebe761, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  di:
-    Pressed: 0
-    InputKey: 0
-    lastPressTime: 0
-  sdi:
-    Pressed: 0
-    InputKey: 0
-    lastPressTime: 0
-    InputString: 
-    ActivationValue: 0.95
-  csdi:
-    Pressed: 0
-    InputKey: 0
-    lastPressTime: 0
 --- !u!4 &597839303
 Transform:
   m_ObjectHideFlags: 0
@@ -574,7 +597,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 8
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &619968778
 GameObject:
@@ -910,7 +933,7 @@ Transform:
   m_LocalScale: {x: 352.13004, y: 1, z: 35.377926}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &768656694
 GameObject:
@@ -1311,29 +1334,64 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Profiles: []
   DefaultProfiles:
-  - ProfileName: Test
-    DigitalInputs:
-    - PlayerButton: 2
+  - ProfileName: 
+    DigitalButtons:
+    - Button: {fileID: 11400000, guid: 0ae7ecfa66bfe8f42820db7aa1170d2a, type: 2}
       inputKeys:
-      - InputKey: 330
-      - InputKey: 331
-      inputStrings:
-      - InputKey: 0
-        InputString: Vertical
-        ActivationValue: 0.8
-        Operator: 2
+      - InputKey: 350
+      - InputKey: 256
+      InputAxis: []
+      singleInput: 1
+    - Button: {fileID: 11400000, guid: 3575028a974f91a42bf48e23ef2470ff, type: 2}
+      inputKeys:
+      - InputKey: 351
+      - InputKey: 257
+      InputAxis: []
+      singleInput: 1
+    - Button: {fileID: 11400000, guid: 0b9b4976786004f478a750d9283750ec, type: 2}
+      inputKeys:
+      - InputKey: 352
+      - InputKey: 258
+      InputAxis: []
+      singleInput: 1
+    - Button: {fileID: 11400000, guid: c67cd5f8c0cb77642b8c7c3451f83612, type: 2}
+      inputKeys:
+      - InputKey: 353
+      - InputKey: 259
+      InputAxis: []
+      singleInput: 1
+    - Button: {fileID: 11400000, guid: 9c75a59ee4726d841ad5efbf37c2d70c, type: 2}
+      inputKeys:
+      - InputKey: 334
+      - InputKey: 260
+      InputAxis: []
+      singleInput: 1
+    - Button: {fileID: 11400000, guid: 76e82cdcf69d88a43a77701b98435659, type: 2}
+      inputKeys:
+      - InputKey: 355
+      - InputKey: 261
+      InputAxis: []
+      singleInput: 1
+    - Button: {fileID: 11400000, guid: 979c0072df3bdd44c93c1760c1e9c34a, type: 2}
+      inputKeys:
+      - InputKey: 356
+      - InputKey: 262
+      InputAxis: []
       singleInput: 0
-    AnalogInputs:
-    - PlayerButton: 4
-      InputStrings:
-      - Axis: 0
-        Type: 0
-        Index: 0
-        InputString: 
-      - Axis: 0
-        Type: 0
-        Index: 0
-        InputString: 
+    - Button: {fileID: 11400000, guid: 10ddde97dff496744b7d5735a8c2002a, type: 2}
+      inputKeys:
+      - InputKey: 357
+      - InputKey: 263
+      InputAxis: []
+      singleInput: 0
+    AnalogDirections:
+    - Axis: 0
+      InputAxis:
+      - InputString: Left_Horizontal_Controller_0
+      InputKeys: []
+    - Axis: 1
+      InputAxis:
+      - InputString: Left_Vertical_Controller_0
       InputKeys: []
     AllowDuplicates: 0
     Deletable: 0
@@ -1348,7 +1406,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1299573833
 GameObject:
@@ -1577,7 +1635,7 @@ RectTransform:
   m_Children:
   - {fileID: 1988400119}
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -1677,7 +1735,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
 --- !u!1 &1979408126
 GameObject:
@@ -1747,7 +1805,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1988400118
 GameObject:
@@ -1866,14 +1924,15 @@ MonoBehaviour:
   InputManager: {fileID: 0}
   InputProfile:
     ProfileName: 
-    DigitalInputs: []
-    AnalogInputs: []
+    DigitalButtons: []
+    AnalogDirections: []
     AllowDuplicates: 0
     Deletable: 1
   MoveSpeed: 3
   attackHitboxes:
   - {fileID: 619968782}
   - {fileID: 1211303554}
+  Jump: {fileID: 0}
 --- !u!143 &2071877984
 CharacterController:
   m_ObjectHideFlags: 0
@@ -1959,5 +2018,5 @@ Transform:
   - {fileID: 783665010}
   - {fileID: 1281315388}
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: -180, z: 0}
