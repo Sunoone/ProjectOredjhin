@@ -1,0 +1,109 @@
+using YourBrain;
+
+namespace Freethware
+{
+	public class Document_Technical
+	{
+		#region Classes
+			// Classes should revolve around a single processing task. This means that for example a button is a class and whatever gets activated by a button is a second class.
+			// Every class functionality is self contained and communication with other classes is being kept at a bare necessary minimum. External classes can override certain 
+			// functionality, but are not required to fill in functionality. 
+
+			// Single task management exceptions:
+			// - Specialized inheritance regarding a core mechanic
+			//		A core mechanic can integrate itself into a deeper structure as most of the game will be dependent on it. At this level, design choices should have been finalized,
+			//		and therefore integration issues can only occur when these design choices impose an inherent flaw. To work around this, specialized inheritance can speed up the 
+			//		development process in order to assist in surfacing these flaws. Additionally, they can be rewritten/formatted quite quickly.
+		#endregion	
+			
+		#region Variables	
+			// Public variables are always declared at the top of the class. Private and protected variables are either at the top of the class or on top of the method they are used in. 
+			// When they are used in multiple methods, they also have to be declared at the top of the class.
+	
+		private variables;
+			// Always start with a small capital, every follow up word or character with a big capital: thisIsAnExample.
+			
+			// Prioritize making variables private unless they need to be used from the inspector or inherited.
+			// Even when made public functionality is necessary, consider properties or return methods instead.
+			
+		protected variables;
+			// Always start with an underscore into a small capital, every follow up word or character with a big capital: _thisIsAnExample.
+			
+			// Simply make any variable required to be manipulated by inheritance, protected.
+			
+		public variables;
+			// Every word or character with a big big capital: ThisIsAnExample.
+			
+			// Do not make a habit of making variables public when it is not needed. This will make bug fixing for others and your future self a lot more difficult.
+			
+		
+		#endregion		
+			
+		#region Methods/Functions
+			// Methods should only do one thing, even when this is a collection of things. For example, take a chess game. A method should be written for moving a piece, another method
+			// to sort the piece into the correct movement category, etc. In the end there will be a management method which actually orchestrates every step for you in order:
+			
+
+		public class Example_ChessPiece
+		{		
+			private ChessPiece pieceType = ChessPiece.Pawn;	
+			private Vector2 boardPosition;
+			public Vector GetBoardPosition(){ return boardPosition; }
+			//public Vector2 BoardPosition{ public get; private set; } This works too.
+			
+			public virtual bool MovePiece(Vector2 endPosition)
+			{
+				ChessPiece otherPiece = IsBlocked(endPosition);
+				if (otherPiece == null) // No piece is in the way, can move freely to desired position.
+				{
+					MoveSuccessAnimation(endPosition, (() => boardPosition = endPosition);
+					return true;
+				}
+				
+				if (IsSameColor(otherPiece)) // There is a piece in the way and it is the same color as yourself.
+				{				
+					MoveFailAnimation();
+					otherPiece.BlockSelfAnimation();
+					return false;
+				}
+				else if (endPosition != otherPiece.GetBoardPosition()) // There is a piece in the way of different color, but not at the desired location.
+				{
+					MoveFailAnimation();
+					otherPiece.BlockOpponentAnimation();
+					return false;
+				}
+				
+				// There is an opponent's piece at the end location.
+				MoveSuccessAnimation(endPosition, (() => boardPosition = endPosition);		
+				return true;
+			}	
+
+				
+			protected virtual bool ChessPiece IsBlocked(Vector2 endPosition){return ChessBoard.CheckForBlock(this, endPosition); 
+			// Own logic, can also be done with a board reference if multiple boards are being used. Currently has a static solution for simplicity.	
+			
+			public virtual void Hit(ChessPiece otherPiece){ // Solve get hit logic. }		
+			public virtual void GetHit(){ // Solve get hit logic. }
+			
+			private ChessColor chessColor;
+			private ChessColor GetChessColor(){ return chessColor; }
+			private bool IsSameColor(ChessPiece chessPiece){ return (GetChessColor() == chessPiece.GetChessColor()); }
+
+			private delegate void Callback();
+			private void MoveFailAnimation(Callback cb){ // Something with boardPosition}
+			private void MoveSuccessAnimation(Vector2 endPosition, Callback cb){}
+			public void BlockOpponentAnimation(Callback cb){}
+			private void BlockSelfAnimation(Callback cb){}
+		}
+		
+		// This class still has some issues. For example, a king has more requirements to its movement. Therefore, the IsBlocked is already made virtual. This way it can be inherited by a king and still solve its solution, without the other pieces
+		// requiring the same performances or casting.
+		
+		parameters;
+			// Name convention is the same as private variables.	
+		#endregion
+		
+		namespaces;
+			/// Preferably, everything is in their own namespace. The main library is all located in Freethware and its branches. 
+		}
+}
