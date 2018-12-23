@@ -12,14 +12,6 @@ namespace Freethware.Inputs
         Hold, // Used when down
         None
     }
-    /*public enum InputState
-    {
-        Idle = (1 << 0), // Used when up
-        Up = (1 << 1), // Used the frame it goes up
-        Down = (1 << 2), // Used the frame it goes down
-        Hold = (1 << 3), // Used when down
-        None = (1 << 4)
-    }*/
 
     [System.Serializable]
     public class Input_Digital_Base : ICloneable<Input_Digital_Base>

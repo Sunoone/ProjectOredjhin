@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using StateMachine;
 
+// Eventually need to reverse the loop
 
 [System.Serializable]
 [CreateAssetMenu(fileName = "FG_State", menuName = "FG/Component/State", order = 1)]

@@ -101,7 +101,6 @@ public class FG_Fighter : MonoBehaviour
     private void Update()
     {
         Profile.RunInput();
-
         AddAxisToStream(Profile.GetAxis());
         AddButtonsToStream();
         UpdateTimeStamps();
@@ -110,14 +109,12 @@ public class FG_Fighter : MonoBehaviour
             TimeInCurrentMove++;
     }
 
-    
-
     [ReadOnly]
     public List<InputUnit> InputStream = new List<InputUnit>();
     [ReadOnly]
     public List<float> InputTimeStamps = new List<float>();
 
-    private Vector2 directionInput;
+    public float WalkSpeed = 1;
     public const float DirectionThreshold = 0f; // Should be 0 if you're using the Unity build-in deadzone for the axis.
     private void AddAxisToStream(Vector2 directionInput)
     {
@@ -166,10 +163,6 @@ public class FG_Fighter : MonoBehaviour
             DigitalButton button = Profile.GetButton(ButtonUnits[i]);
             InputState buttonState = button.GetInputState();
             buttonUnits[i].InputState = buttonState;
-            /*if (buttonState == InputState.Down)
-            {
-                Debug.Log("Pressed: " + button.Button.name);
-            }*/
             InputStream.Add(buttonUnits[i]);
         }
     }
@@ -199,6 +192,8 @@ public class FG_Fighter : MonoBehaviour
     private bool LinkMove()
     {
         FG_MoveLinkToFollow MoveLinkToFollow = CurrentMove.TryLinks(this, InputStream);
+        //if (MoveLinkToFollow != null) 
+        //    Debug.Log("MoveLinkToFollow: " + MoveLinkToFollow.Link.name);
         if (MoveLinkToFollow != null && MoveLinkToFollow.SMR.CompletionType == StateMachine.EStateMachineCompletionType.Accepted)
         {
             //Debug.Log("Switch to state: " + MoveLinkToFollow.Link.Move.MoveName);

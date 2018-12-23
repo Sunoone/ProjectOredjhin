@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3811ae8874639ee4385f443e7c736b70, type: 3}
+  m_Name: link_IdleToFireball
+  m_EditorClassIdentifier: 
+  InputStateMachine: {fileID: 11400000, guid: 357a2007469902949bd66472cf4a0de2, type: 2}
+  StateMachineResult:
+    CompletionType: 0
+    FinalState: {fileID: 0}
+    DataIndex: 0
+  Move: {fileID: 11400000, guid: 481291bba41bec541a7adb524449302e, type: 2}
+  CancelWindows: []
+  ClearInput: 1

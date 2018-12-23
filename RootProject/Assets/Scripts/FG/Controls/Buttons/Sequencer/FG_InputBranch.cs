@@ -68,22 +68,25 @@ public class FG_InputBranch : SM_BranchBase {
                 {
                     if (buttonUnit.InputState == InputState.Down)
                     {
+                        //Debug.Log("Down: " + buttonUnit.Description);
                         bRequiredButtonPressed = true;
                         continue;
                     }
                     else if (buttonUnit.InputState == InputState.Hold)
                     {
+                        //Debug.Log("Hold: " + buttonUnit.Description);
                         continue;
                     }
                     return null;
                 }
                 else if (i == (ForbiddenButtons & (1 << i)))
                 {
-                    if (buttonUnit.InputState != InputState.Down)
+                    if (buttonUnit.InputState == InputState.Down)
                     {
-                        continue;
+                        //Debug.Log("Forbidden: " + buttonUnit.Description);
+                        return null;
                     }
-                    return null;
+                    continue;         
                 }
             }
             else
